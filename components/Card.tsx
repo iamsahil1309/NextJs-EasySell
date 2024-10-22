@@ -18,7 +18,7 @@ const Card = ({id, name, description, price, imageUrl} : CardProps) => {
               {/* image url */}
               <Image
                 src={imageUrl}
-                layout="fill"
+                fill = {true}
                 style={{ objectFit: "cover" }}
                 className="rounded-t"
                 alt={name}
