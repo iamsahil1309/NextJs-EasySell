@@ -1,5 +1,5 @@
 import Card from "@/components/Card";
-import { createClient } from "@/client/client";
+import { createClient } from "@/supabase/client";
 import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
@@ -30,13 +30,14 @@ export default async function Home() {
             <p className="text-xl">You can pay to boost your product here.</p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 xl:gap-12">
-            {topProducts && topProducts.map((product) => (
-              <Card
-                key={`${product.name} - ${product.id}`}
-                {...product}
-                imageUrl={`${process.env.SUPABASE_URL}/storage/v1/object/public/storage/${product.imageUrl}`}
-              />
-            ))}
+            {topProducts &&
+              topProducts.map((product) => (
+                <Card
+                  key={`${product.name} - ${product.id}`}
+                  {...product}
+                  imageUrl={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/storage/${product.imageUrl}`}
+                />
+              ))}
           </div>
         </div>
 
@@ -46,7 +47,7 @@ export default async function Home() {
             <Card
               key={`${product.name} - ${product.id}`}
               {...product}
-              imageUrl={`${process.env.SUPABASE_URL}/storage/v1/object/public/storage/${product.imageUrl}`}
+              imageUrl={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/storage/${product.imageUrl}`}
             />
           ))}
         </div>
